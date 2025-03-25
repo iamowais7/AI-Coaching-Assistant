@@ -6,7 +6,7 @@ export default defineSchema({
     users:defineTable({
         name:v.string(),
         email:v.string(),
-        credits:v.string(),
-        subscriptionId:v.string()
+        credits:v.number(),
+        subscriptionId:v.optional(v.string())
     })
 })
