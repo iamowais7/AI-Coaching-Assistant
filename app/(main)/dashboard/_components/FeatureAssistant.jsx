@@ -5,6 +5,7 @@ import { CoachingOptions } from '@/services/Options'
 import { useUser } from '@stackframe/stack'
 import Image from 'next/image'
 import React from 'react'
+import UserInputDialog from './UserInputDialog'
 
 function FeatureAssistant() {
 
@@ -19,13 +20,17 @@ function FeatureAssistant() {
         <Button className="bg-[linear-gradient(45deg,_#64C2DB,_#7476ED,_#C994DF,_#E56F8C)]">Profile</Button>
         </div>
 
-        <div className='grid grid-cols-2 lg:grid-cols-5 xl:grid-cols-6 gap-5 mt-7'>
+        <div className='grid grid-cols-2 lg:grid-cols-5 xl:grid-cols-6 gap-6 mt-7'>
             {CoachingOptions.map((option,index)=>(
                  <BlurFade key={option.icon} delay={0.25 + index * 0.05} inView>
-                <div key={index} className='p-3 bg-secondary rounded-xl flex flex-col justify-center items-center'>
+                  <div key={index} className='p-3 bg-secondary rounded-xl flex flex-col justify-center items-center'>
+                  <UserInputDialog CoachingOptions={option}>
+                <div key={index} className='flex flex-col justify-center items-center'>
                     <Image src={option.icon} alt='option logo'
                      height={150} width={150} className='h-[70px] w-[70px] hover:rotate-12 cursor-pointer transition-all'/>
                      <h2 className='mt-2'>{option.name}</h2>
+                </div>
+                </UserInputDialog>
                 </div>
                 </BlurFade>
             ))}
