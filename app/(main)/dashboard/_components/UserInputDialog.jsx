@@ -10,15 +10,30 @@ import {
   } from "@/components/ui/dialog"
 import { Textarea } from '@/components/ui/textarea'
 import { CoachingExpert } from '@/services/Options'
-import { View } from 'lucide-react'
+import { LoaderCircle, View } from 'lucide-react'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
+import { useMutation } from 'convex/react'
+import { api } from '@/convex/_generated/api'
   
 
 function UserInputDialog({children,CoachingOptions}) {
     
     const [selectedExpert,setSelectedExpert] = useState()
     const [topic,setTopic] = useState()
+    const createDiscussionRoom = useMutation(api.DiscussionRoom.CreateNewRoom)
+    const [loading,setLoading] = useState(false)
+
+    const onClickNext=async()=>{
+      setLoading(true)
+      const result = await createDiscussionRoom({
+        topic:topic,
+        coachingOption:CoachingOptions?.name,
+        expertName:selectedExpert
+      })
+      console.log("result is",result)
+      setLoading(false)
+    }
 
   return (
     <div>
@@ -47,7 +62,9 @@ function UserInputDialog({children,CoachingOptions}) {
                 <DialogClose asChild>
                 <Button variant={'ghost'}>Cancel</Button>
                 </DialogClose>
-                <Button disabled={(!topic || !selectedExpert)} className={'bg-[linear-gradient(45deg,_#64C2DB,_#7476ED,_#C994DF,_#E56F8C)]'}>Next</Button>
+                <Button disabled={(!topic || !selectedExpert || loading)} onClick={onClickNext}
+                 className={'bg-[linear-gradient(45deg,_#64C2DB,_#7476ED,_#C994DF,_#E56F8C)]'}
+                  >{loading&&<LoaderCircle className='animate-spin'/>}Next</Button>
 
             </div>
         </div>
