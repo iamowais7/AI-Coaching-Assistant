@@ -23,6 +23,8 @@ function UserInputDialog({children,CoachingOptions}) {
     const [topic,setTopic] = useState()
     const createDiscussionRoom = useMutation(api.DiscussionRoom.CreateNewRoom)
     const [loading,setLoading] = useState(false)
+    const [openDialog,setOpenDialog] = useState(false)
+
 
     const onClickNext=async()=>{
       setLoading(true)
@@ -33,11 +35,12 @@ function UserInputDialog({children,CoachingOptions}) {
       })
       console.log("result is",result)
       setLoading(false)
+      setOpenDialog(false)
     }
 
   return (
     <div>
-        <Dialog>
+        <Dialog open={openDialog} onOpenChange={setOpenDialog}>
   <DialogTrigger>{children}</DialogTrigger>
   <DialogContent>
     <DialogHeader>
