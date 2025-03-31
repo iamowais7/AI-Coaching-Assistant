@@ -1,9 +1,9 @@
 import React from 'react'
 
-function DiscussionRoom() {
+function DiscussionRoom () {
   return (
-    <div>DiscussionRoom</div>
+    <div>DiscussionRoom images </div>
   )
 }
 
-export default DiscussionRoom
+export default DiscussionRoom 
