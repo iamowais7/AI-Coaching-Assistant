@@ -2,7 +2,7 @@ import React from 'react'
 
 function DiscussionRoom () {
   return (
-    <div>DiscussionRoom images </div>
+    <div className='text-3xl'>DiscussionRoom images  </div>
   )
 }
 
