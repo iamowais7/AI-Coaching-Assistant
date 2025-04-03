@@ -15,6 +15,8 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { useMutation } from 'convex/react'
 import { api } from '@/convex/_generated/api'
+import { useRouter } from 'next/navigation'
+
   
 
 function UserInputDialog({children,CoachingOptions}) {
@@ -24,6 +26,7 @@ function UserInputDialog({children,CoachingOptions}) {
     const createDiscussionRoom = useMutation(api.DiscussionRoom.CreateNewRoom)
     const [loading,setLoading] = useState(false)
     const [openDialog,setOpenDialog] = useState(false)
+    const router = useRouter()
 
 
     const onClickNext=async()=>{
@@ -36,6 +39,7 @@ function UserInputDialog({children,CoachingOptions}) {
       console.log("result is",result)
       setLoading(false)
       setOpenDialog(false)
+      router.push('./discussion-room/'+result)
     }
 
   return (
